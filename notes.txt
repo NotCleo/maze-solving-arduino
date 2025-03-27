@@ -1,0 +1,30 @@
+Maze Size as n:
+
+    The maze size is defined as MAZE_SIZE, which you can set to any value (e.g., 4 for a 4x4 maze, 10 for a 10x10 maze). This makes the code flexible for any n × n maze.
+    Arrays (wallMap, distanceMap, visited) are defined with dimensions [MAZE_SIZE][MAZE_SIZE].
+
+Wall Following Implementation:
+
+    The navigateWithWallFollowing() function uses the right-hand rule to navigate the maze, as in your original code.
+    It updates the wallMap based on sensor readings, storing walls as bits (North, East, South, West).
+    The robot tracks its position (robotX, robotY) and orientation (orientation) to correctly map walls and move through the maze.
+
+Flood Fill Implementation:
+
+    The floodFill() function implements the Flood Fill algorithm as described in your project. It starts from the destination (MAZE_SIZE-1, MAZE_SIZE-1) and assigns distance values to each cell, considering walls in wallMap.
+    The navigateWithFloodFill() function uses the distance map to move to the neighboring cell with the lowest distance, ensuring the shortest path back to the start (0, 0).
+
+Memory Usage:
+
+    For MAZE_SIZE = 10 (10x10 maze):
+        wallMap: 10 × 10 × 1 byte = 100 bytes
+        distanceMap: 10 × 10 × 1 byte = 100 bytes
+        visited: 10 × 10 × 1 byte = 100 bytes
+        Queue for Flood Fill: 10 × 10 × 2 × 2 bytes = 400 bytes
+        Total: ~700 bytes (well within the Arduino Uno’s 2 KB SRAM).
+    The code is memory-efficient and can handle a 10x10 maze.
+
+Sensor Thresholds:
+
+    Retained the 5 cm T-junction threshold and other thresholds (7–13 cm for wall following, 8 cm for front obstacle, 20 cm for side obstacle) from your original code.
+    These can be adjusted via the defined constants if needed for a different maze size.
